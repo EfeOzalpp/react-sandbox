@@ -1,6 +1,6 @@
 // selecting specific classes returning strings
 
-// $= for ending, ^= for starting *= containing. main[data-key^="7"][data-key$="1"] means = 7*1
+// $= for ending, ^= for starting, *= containing. main[data-key^="7"][data-key$="1"] means = 7*1
 
 //example 1:
 

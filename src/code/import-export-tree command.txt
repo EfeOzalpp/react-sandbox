@@ -1,0 +1,21 @@
+To create a quick import export dependencies for finding architecture problems and leaks
+
+
+Select a child folder relative to the file saving location.
+
+Get-ChildItem .\src\folder -Recurse -Include *.ts,*.tsx,*.js,*.jsx |
+>>   Select-String -Pattern "^\s*(import|export).+from\s+['""]" |
+>>   ForEach-Object { "$($_.Path):$($_.LineNumber):$($_.Line.Trim())" } |
+>>   Out-File -Encoding utf8 .\exported-folder-name.txt
+
+
+Directly save on that location
+
+Get-ChildItem . -Recurse -File -Include *.ts,*.tsx,*.js,*.jsx |
+  Select-String -Pattern "^\s*(import|export)\s+.*\s+from\s+['""]" |
+  ForEach-Object { "{0}:{1}:{2}" -f $_.Path, $_.LineNumber, $_.Line.Trim() } |
+  Out-File -Encoding utf8 imports-exports.txt
+
+A tree folder command
+
+tree /F > file-tree.txt
